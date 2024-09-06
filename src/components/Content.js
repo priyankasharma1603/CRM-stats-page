@@ -40,8 +40,8 @@ const Content = () => {
       {/* Time Selector */}
       <TimeSelector selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
 
-      {/* Overview Cards with Darker Colors */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      {/* Overview Cards with Responsive Design */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
         <OverviewCard
           title="Income"
           value={`$${data.income.toLocaleString()}`}
