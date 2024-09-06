@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../assets/JohnZeratsky_web-8510-1.jpg'
+import avatar from '../assets/1.jpg'
 
 const UserCard = ({ name, balance }) => {
   return (

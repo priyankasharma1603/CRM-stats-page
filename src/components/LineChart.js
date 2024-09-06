@@ -11,17 +11,30 @@ const data = [
   { name: 'Jun', value: 7000 },
 ];
 
+// Updated color for the line and other elements
+const DARK_LINE_COLOR = '#333366'; // Dark Indigo for the line
+const GRID_COLOR = '#CCCCCC'; // Light Grey for grid lines
+const AXIS_TEXT_COLOR = '#000000'; // Black for axes text
+
 const LineChartComponent = () => (
-  <ResponsiveContainer width="100%" height={300}>
-    <LineChart data={data}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
-    </LineChart>
-  </ResponsiveContainer>
+  <div style={{ backgroundColor: '#FFFFFF', padding: '20px', borderRadius: '10px' }}>
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart data={data}>
+        <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+        <XAxis dataKey="name" stroke={AXIS_TEXT_COLOR} tick={{ fontSize: 12, fontWeight: 'bold' }} />
+        <YAxis stroke={AXIS_TEXT_COLOR} tick={{ fontSize: 12, fontWeight: 'bold' }} />
+        <Tooltip
+          contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #CCCCCC' }}
+          labelStyle={{ color: AXIS_TEXT_COLOR, fontWeight: 'bold' }}
+          itemStyle={{ color: AXIS_TEXT_COLOR }}
+        />
+        <Legend
+          wrapperStyle={{ color: AXIS_TEXT_COLOR, fontWeight: 'bold' }}
+        />
+        <Line type="monotone" dataKey="value" stroke={DARK_LINE_COLOR} activeDot={{ r: 8 }} />
+      </LineChart>
+    </ResponsiveContainer>
+  </div>
 );
 
 export default LineChartComponent;

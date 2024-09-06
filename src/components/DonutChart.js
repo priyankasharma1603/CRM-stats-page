@@ -9,13 +9,13 @@ const data = [
   { name: 'Group D', value: 200 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#4B0082', '#006400', '#556B2F', '#000001']; // Darker colors for slices
 
 const DonutChartComponent = () => (
-  <ResponsiveContainer width="100%" height={300}>
+  <ResponsiveContainer width="100%" height={300} style={{ backgroundColor: 'white' }}>
     <PieChart>
-      <Tooltip />
-      <Legend />
+      <Tooltip contentStyle={{ backgroundColor: 'black', color: 'white' }} />
+      <Legend wrapperStyle={{ color: 'black' }} />
       <Pie
         data={data}
         dataKey="value"

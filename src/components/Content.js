@@ -1,64 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BarChartComponent from './BarChart';
 import PieChartComponent from './PieChart';
 import LineChartComponent from './LineChart';
 import DonutChartComponent from './DonutChart';
 import OverviewCard from './OverviewCard';
 import TimeSelector from './TimeSelector';
+import { AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineDollarCircle } from 'react-icons/ai';
+import { FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Icons for status indication
+// Sample data for different time windows
+const dataByTime = {
+  'Last Week': {
+    income: 8500,
+    expenses: 3200,
+    investments: 4200,
+    donations: 700,
+  },
+  'Last Month': {
+    income: 12547,
+    expenses: 4320,
+    investments: 6250,
+    donations: 1500,
+  },
+  'Last Year': {
+    income: 150000,
+    expenses: 58000,
+    investments: 75000,
+    donations: 23000,
+  },
+};
 
 const Content = () => {
-  return (
-    <div className="p-6 bg-gray-50 flex-grow">
-      {/* Time Selector */}
-      <TimeSelector />
+  const [selectedTime, setSelectedTime] = useState('Last Month');
 
-      {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  const data = dataByTime[selectedTime]; // Get data based on selected time window
+
+  return (
+    <div className="min-h-screen p-6">
+      {/* Time Selector */}
+      <TimeSelector selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+
+      {/* Overview Cards with Darker Colors */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <OverviewCard
           title="Income"
-          value="$12,547"
-          description="Income in the selected time range"
-          growth={12.5} // Indicates positive growth
-          bgColor="bg-gradient-to-r from-green-200 via-green-300 to-green-400"
+          value={`$${data.income.toLocaleString()}`}
+          description={`Income in the ${selectedTime}`}
+          percentageChange="12.5%"
+          icon={<AiOutlineDollarCircle className="text-3xl" />}
+          color="bg-gradient-to-br from-blue-900 to-blue-700"
         />
         <OverviewCard
           title="Expenses"
-          value="$4,320"
-          description="Expenses in the selected time range"
-          growth={-5.2} // Indicates negative growth
-          bgColor="bg-gradient-to-r from-red-200 via-red-300 to-red-400"
+          value={`$${data.expenses.toLocaleString()}`}
+          description={`Expenses in the ${selectedTime}`}
+          percentageChange="-5.2%"
+          icon={<FiTrendingDown className="text-3xl" />}
+          color="bg-gradient-to-br from-red-900 to-red-700"
         />
         <OverviewCard
           title="Investments"
-          value="$6,250"
-          description="Investments in the selected time range"
-          growth={8.0} // Indicates positive growth
-          bgColor="bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400"
+          value={`$${data.investments.toLocaleString()}`}
+          description={`Investments in the ${selectedTime}`}
+          percentageChange="8.0%"
+          icon={<FiTrendingUp className="text-3xl" />}
+          color="bg-gradient-to-br from-purple-900 to-purple-700"
         />
         <OverviewCard
           title="Donations"
-          value="$1,500"
-          description="Donations in the selected time range"
-          growth={-2.0} // Indicates negative growth
-          bgColor="bg-gradient-to-r from-orange-200 via-orange-300 to-orange-400"
+          value={`$${data.donations.toLocaleString()}`}
+          description={`Donations in the ${selectedTime}`}
+          percentageChange="-2.0%"
+          icon={<AiOutlineArrowDown className="text-3xl" />}
+          color="bg-gradient-to-br from-orange-900 to-orange-700"
         />
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="bg-white shadow-md p-4 rounded-lg">
-          <BarChartComponent />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white shadow-md p-6 rounded-lg">
+          <BarChartComponent selectedTime={selectedTime} />
         </div>
-        <div className="bg-white shadow-md p-4 rounded-lg">
-          <PieChartComponent />
+        <div className="bg-white shadow-md p-6 rounded-lg">
+          <PieChartComponent selectedTime={selectedTime} />
         </div>
-        <div className="bg-white shadow-md p-4 rounded-lg">
-          <LineChartComponent />
+        <div className="bg-white shadow-md p-6 rounded-lg">
+          <LineChartComponent selectedTime={selectedTime} />
         </div>
-        <div className="bg-white shadow-md p-4 rounded-lg">
-          <DonutChartComponent />
+        <div className="bg-white shadow-md p-6 rounded-lg">
+          <DonutChartComponent selectedTime={selectedTime} />
         </div>
       </div>
     </div>

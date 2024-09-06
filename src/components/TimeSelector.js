@@ -1,18 +1,21 @@
-import React from "react";
+import React from 'react';
 
-const TimeSelector = ({ setTimeRange }) => {
+const TimeSelector = ({ selectedTime, setSelectedTime }) => {
+  const timeOptions = ['Last Week', 'Last Month', 'Last Year'];
+
   return (
-    <div className="mb-4">
-      <label className="mr-2 font-semibold">Select Time Range:</label>
+    <div className="mb-6">
+      <label className="block text-white font-semibold mb-2">Select Time Range:</label>
       <select
-        onChange={(e) => setTimeRange(e.target.value)}
-        className="p-2 bg-gray-100 rounded-lg"
+        value={selectedTime}
+        onChange={(e) => setSelectedTime(e.target.value)}
+        className="p-2 rounded-lg shadow-md bg-white text-gray-700"
       >
-        <option value="1 day">1 day</option>
-        <option value="1 week">1 week</option>
-        <option value="1 month">1 month</option>
-        <option value="6 months">6 months</option>
-        <option value="1 year">1 year</option>
+        {timeOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   );

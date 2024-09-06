@@ -8,7 +8,8 @@ const data = [
   { name: 'Group D', value: 60 },  // 8%
 ];
 
-const COLORS = ['#FF8042', '#FFBB28', '#A058EC', '#0088FE'];
+// Darker color palette
+const COLORS = ['#4B0082', '#2E8B57', '#556B2F', '#483D8B']; // Darker colors
 const RADIAN = Math.PI / 180;
 
 // Helper function to calculate percentage
@@ -18,7 +19,7 @@ const getPercentage = (value, total) => ((value / total) * 100).toFixed(0);
 const renderCustomizedLabel = ({
   cx, cy, midAngle, innerRadius, outerRadius, percent, index, value,
 }) => {
-  const radius = outerRadius + 20;
+  const radius = outerRadius + 10;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -29,10 +30,10 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      fill="red" // Label color
+      fill="white" // Use white color for contrast
       textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
-      fontSize={20}
+      fontSize={10}
       fontWeight="bold"
     >
       {`${percentage}%`}
@@ -43,7 +44,7 @@ const renderCustomizedLabel = ({
 const totalValue = data.reduce((sum, entry) => sum + entry.value, 0);
 
 const PieChartComponent = () => (
-  <ResponsiveContainer width="100%" height={400}>
+  <ResponsiveContainer width="100%" height={300}>
     <PieChart>
       <Pie
         data={data}
@@ -51,7 +52,7 @@ const PieChartComponent = () => (
         cy="50%"
         labelLine={false}
         label={renderCustomizedLabel}
-        outerRadius={120}
+        outerRadius={100}
         fill="#8884d8"
         dataKey="value"
       >
@@ -64,7 +65,7 @@ const PieChartComponent = () => (
         layout="horizontal"
         verticalAlign="bottom"
         align="center"
-        wrapperStyle={{ paddingTop: '20px' }}
+        wrapperStyle={{ paddingTop: '20px', paddingBottom: '5px', fontWeight: 'bold', color: 'black' }}
       />
     </PieChart>
   </ResponsiveContainer>

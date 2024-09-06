@@ -1,41 +1,31 @@
-import React from "react";
-import { Tooltip } from "react-tooltip";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import React from 'react';
 
-const OverviewCard = ({ title, value, description, growth, bgColor }) => {
+const OverviewCard = ({ title, value, description, percentageChange, icon, color }) => {
   return (
     <div
-      className={`relative ${bgColor} shadow-md rounded-lg p-6 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg`}
+      className={`relative overflow-hidden rounded-lg shadow-lg p-6 text-white transform transition-transform duration-300 hover:scale-105 ${color}`}
     >
-      {/* Card Header */}
-      <div className="flex items-center justify-between">
-        <div className="text-sm font-medium text-gray-700">{title}</div>
-        {/* Tooltip Icon */}
-        <span
-          className="cursor-pointer"
-          data-tooltip-id="description-tooltip"
-        >
-          <AiOutlineInfoCircle className="text-gray-400 hover:text-gray-600" />
-        </span>
-        <Tooltip id="description-tooltip" content={description} />
-      </div>
-
-      {/* Card Value */}
-      <div className="text-3xl font-bold text-gray-800 mt-3">{value}</div>
-
-      {/* Growth Indicator */}
-      {growth && (
-        <div
-          className={`flex items-center mt-1 text-sm ${
-            growth > 0 ? "text-green-500" : "text-red-500"
-          }`}
-        >
-          <span className="mr-1">
-            {growth > 0 ? "▲" : "▼"}
-          </span>
-          {Math.abs(growth)}%
+      {/* Icon with Circle Background */}
+      <div className="absolute top-4 right-4">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white bg-opacity-10 text-white">
+          {icon}
         </div>
-      )}
+      </div>
+      
+      {/* Title and Value */}
+      <h4 className="text-xl font-semibold mb-2">{title}</h4>
+      <p className="text-3xl font-bold">{value}</p>
+      
+      {/* Description */}
+      <p className="text-sm opacity-80 mt-2">{description}</p>
+
+      {/* Percentage Change */}
+      <div className="mt-4">
+        <span className={`font-semibold ${percentageChange.startsWith('-') ? 'text-red-400' : 'text-green-400'}`}>
+          {percentageChange}
+        </span>{' '}
+        {percentageChange.startsWith('-') ? 'Decrease' : 'Increase'}
+      </div>
     </div>
   );
 };
